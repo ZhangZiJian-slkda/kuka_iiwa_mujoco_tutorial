@@ -26,8 +26,8 @@
       <geom name="Z" type="cylinder" size="0.005" fromto="0 0 0 0 0 0.3" rgba="0 0 1 1" contype="0" conaffinity="0"/>
     </body>
 
-    <body name="target" pos="-0.34 0.3 0.4">
-      <geom size="0.02" rgba="0 1 0 0.5" contype="0" conaffinity="0"/>
+    <body name="target"  mocap ="true" pos="-0.53 0.3 0.5">
+      <geom type = "sphere" size="0.02" rgba="0 1 0 0.5" contype="0" conaffinity="0"/>
     </body>
   </worldbody>
 </mujoco>
