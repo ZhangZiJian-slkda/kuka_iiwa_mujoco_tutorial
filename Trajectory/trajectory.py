@@ -2,7 +2,7 @@
 Author: Zhang-sklda 845603757@qq.com
 Date: 2025-11-15 20:45:16
 LastEditors: Zhang-sklda 845603757@qq.com
-LastEditTime: 2025-11-22 16:10:54
+LastEditTime: 2025-11-22 23:35:33
 FilePath: /kuka_iiwa_mujoco_tutorial/trajectory.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -10,6 +10,7 @@ import mujoco.viewer
 import numpy as np
 import ikpy.chain
 import transforms3d as tf
+import time
 
 def viewer_init(viewer):
     """渲染器的摄像头视角初始化"""
@@ -53,16 +54,18 @@ def main():
     my_chain.active_links_mask[-1] = False  # 将末端固定 link 标记为非活动
     my_chain.active_links_mask[0] = False   # 将基座 link 标记为非活动
 
-    start_joints = [ 0, 0, 0, 0, 0, 0, 0]
-    data.qpos[:] = start_joints
+    start_joints = [ 0, 0, 0, 1.57, 0, 0, 0]
+    data.ctrl[:7] = start_joints
 
-    target_position = [-0.13, 0.6, 0.1]
-    target_euler = [3.14, 0, 1.57]
-    reference_position = [0, 0, -1.57, -1.34, 2.65, -1.3, 1.55, 0, 0]
+    target_position = [0.486, 0.0, 0.768]
+    target_euler = [0, 0, 0]
+    reference_position = [0, 0, 0, 0, -1.57, 0 , 0, 0, 0]
     target_orientation = tf.euler.euler2mat(*target_euler)
 
-    joint_angles = my_chain.inverse_kinematics(target_position=target_position,target_orientation=target_orientation,reference_position=reference_position)
-    end_joints = joint_angles[2:-1]
+    joint_angles = my_chain.inverse_kinematics(target_position=target_position,target_orientation=target_orientation,initial_position=reference_position)
+    # 取 active joints
+    end_joints = joint_angles[my_chain.active_links_mask]
+
 
     joint_trajectory = JointSpaceTrajectory(start_joints,end_joints,steps=100)
     with mujoco.viewer.launch_passive(model,data) as viewer:
@@ -72,6 +75,8 @@ def main():
             data.ctrl[:7]=waypoint
             mujoco.mj_step(model,data)
             viewer.sync()
+            time.sleep(0.002)
+
 
 if __name__ == "__main__":
     main()
