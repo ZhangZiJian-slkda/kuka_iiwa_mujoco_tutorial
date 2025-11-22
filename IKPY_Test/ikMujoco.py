@@ -2,7 +2,7 @@
 Author: Zhang-sklda 845603757@qq.com
 Date: 2025-11-15 20:13:11
 LastEditors: Zhang-sklda 845603757@qq.com
-LastEditTime: 2025-11-16 18:04:52
+LastEditTime: 2025-11-22 17:05:01
 FilePath: /kuka_iiwa_mujoco_tutorial/ikMujoco.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -19,10 +19,10 @@ def main():
     my_chain.active_links_mask[-1] = False  # 将末端固定 link 标记为非活动
     my_chain.active_links_mask[0] = False   # 将基座 link 标记为非活动
 
-    target_position = [-0.53,0.3,0.5]  # 末端执行器在世界坐标系下的目标位置的xyz
+    target_position = [0.486, 0.0, 0.768]  # 末端执行器在世界坐标系下的目标位置的xyz
     target_orientation = [0 ,0, 0]  # Roll, Pitch, Yaw in radians
     rotation_matrix = tf.euler.euler2mat(*target_orientation)
-    initial_position = [0 ,0, 0, 0, 1.57, 0, 1.57, 0, 0]  # 提供初始关节角猜测，用于优化求解 
+    initial_position = [0 ,0, 0, 0, -1.57, 0, 0, 0, 0]  # 提供初始关节角猜测，用于优化求解 
 
     ee_id = model.site("attachment_site").id
 

@@ -1,8 +1,8 @@
 '''
 Author: Zhang-sklda 845603757@qq.com
 Date: 2025-11-15 20:45:16
-LastEditors: 张子健 16139863+abc845603757@user.noreply.gitee.com
-LastEditTime: 2025-11-16 22:28:00
+LastEditors: Zhang-sklda 845603757@qq.com
+LastEditTime: 2025-11-22 16:10:54
 FilePath: /kuka_iiwa_mujoco_tutorial/trajectory.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -53,8 +53,8 @@ def main():
     my_chain.active_links_mask[-1] = False  # 将末端固定 link 标记为非活动
     my_chain.active_links_mask[0] = False   # 将基座 link 标记为非活动
 
-    start_joints = [0, 0, 0, 0, 0, 0, 0]
-    data.qpos[1:8] = start_joints
+    start_joints = [ 0, 0, 0, 0, 0, 0, 0]
+    data.qpos[:] = start_joints
 
     target_position = [-0.13, 0.6, 0.1]
     target_euler = [3.14, 0, 1.57]
