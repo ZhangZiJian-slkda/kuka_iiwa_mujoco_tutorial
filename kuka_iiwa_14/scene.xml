@@ -29,5 +29,10 @@
     <body name="target"  mocap ="true" pos="0.486 0.0 0.768">
       <geom type = "sphere" size="0.02" rgba="0 1 0 0.5" contype="0" conaffinity="0"/>
     </body>
+
+    <body name="red_box" pos ="0.5 0.0 0.5" euler ="0 0 0">
+      <joint name="red_box_joint" type="free"/>
+      <geom name="red_box_geom" type="box" size="0.2 0.2 0.6" rgba="1 0 0 1" mass="1.0"/>
+    </body>
   </worldbody>
 </mujoco>

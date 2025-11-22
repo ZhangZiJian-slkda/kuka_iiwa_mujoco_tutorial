@@ -2,7 +2,7 @@
 Author: Zhang-sklda 845603757@qq.com
 Date: 2025-11-15 20:45:16
 LastEditors: Zhang-sklda 845603757@qq.com
-LastEditTime: 2025-11-22 23:35:33
+LastEditTime: 2025-11-23 01:09:42
 FilePath: /kuka_iiwa_mujoco_tutorial/trajectory.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -54,12 +54,13 @@ def main():
     my_chain.active_links_mask[-1] = False  # 将末端固定 link 标记为非活动
     my_chain.active_links_mask[0] = False   # 将基座 link 标记为非活动
 
-    start_joints = [ 0, 0, 0, 1.57, 0, 0, 0]
+    start_joints = [ 0,-0.628, 0, -1.91, 0, 0.105, 0]
+    # start_joints = [ 0,0,0,-1.57,0,0,0]
     data.ctrl[:7] = start_joints
 
     target_position = [0.486, 0.0, 0.768]
     target_euler = [0, 0, 0]
-    reference_position = [0, 0, 0, 0, -1.57, 0 , 0, 0, 0]
+    reference_position = [0, 0, 0, 0, -1.57, 0, 0, 0, 0]
     target_orientation = tf.euler.euler2mat(*target_euler)
 
     joint_angles = my_chain.inverse_kinematics(target_position=target_position,target_orientation=target_orientation,initial_position=reference_position)
