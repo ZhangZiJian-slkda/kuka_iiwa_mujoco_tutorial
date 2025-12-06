@@ -138,11 +138,6 @@
                     <geom class="visual" mesh="link_7"/>
                     <geom class="collision" size="0.06" pos="0 0 0.001"/>
                     <site pos="0 0 0.045" name="attachment_site"/>
-                    <!--你需要添加的-->
-                    <body name="force_sensor" pos="0 0 0.05" euler="3.14 0 3.14">
-                        <geom name='force_sensor_geom' type="sphere" mass="0.0" size="0.04" rgba="0 1 0 0.3"/>
-                        <site name="force_sensor_site" pos="0 0 0" quat="1 0 0 0"/>
-                    </body>
                   </body>
                 </body>
               </body>
@@ -152,10 +147,6 @@
       </body>
     </body>
   </worldbody>
-
-  <sensor>
-    <force site="force_sensor_site"/>
-  </sensor>
 
   <contact>
     <exclude body1="base" body2="link1"/>
